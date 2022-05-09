@@ -8,14 +8,18 @@
         "start": "node build/app.js",
         "dev": "nodemon src/app.ts --watch",
         "build": "npx tsc",
+        "db:up": "npx db-migrate up",
+        "db:down": "npx db-migrate reset",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@types/bcrypt": "^5.0.0",
         "@types/cors": "^2.8.12",
         "@types/express": "^4.17.13",
         "@types/jasmine": "^4.0.3",
+        "@types/jsonwebtoken": "^8.5.8",
         "@types/morgan": "^1.9.3",
         "@types/pg": "^8.6.5",
         "jasmine": "^4.1.0",
@@ -24,12 +28,14 @@
         "typescript": "^4.6.3"
     },
     "dependencies": {
+        "bcrypt": "^5.0.1",
         "cors": "^2.8.5",
         "db-migrate": "^0.11.13",
         "db-migrate-pg": "^1.2.2",
         "dotenv": "^16.0.0",
         "express": "^4.18.0",
         "helmet": "^5.0.2",
+        "jsonwebtoken": "^8.5.1",
         "morgan": "^1.10.0",
         "pg": "^8.7.3"
     }

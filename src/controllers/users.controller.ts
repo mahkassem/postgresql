@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { create, getAll, getById } from '../entities/users/users.repo';
+import { createUser, getAll, getById } from '../entities/users/users.repo';
 
 const getAllHandler = async (req: Request, res: Response) => {
     try {
@@ -26,8 +26,8 @@ const getByIdHandler = async (req: Request, res: Response) => {
 
 const createHandler = async (req: Request, res: Response) => {
     try {
-        const { name, color } = req.body;
-        const user = await create({ name, color });
+        const { name, color, email, password } = req.body;
+        const user = await createUser({ name, color, email, password });
         res.send(user);
     } catch (error) {
         res.status(500).send(error);

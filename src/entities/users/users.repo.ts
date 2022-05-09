@@ -13,10 +13,16 @@ const getById = async (id: number): Promise<User> => {
     return result.rows[0];
 }
 
-const create = async (user: User): Promise<User> => {
-    const queryText = `INSERT INTO users (name, color) VALUES ($1, $2) RETURNING *`;
-    const result = await DB.query(queryText, [user.name, user.color]);
+const getByEmail = async (email: string): Promise<User> => {
+    const queryText = `SELECT * FROM users WHERE email = $1`;
+    const result = await DB.query(queryText, [email]);
     return result.rows[0];
 }
 
-export { getAll, getById, create };
+const createUser = async (user: User): Promise<User> => {
+    const queryText = `INSERT INTO users (name, color, email, password) VALUES ($1, $2, $3, $4) RETURNING *`;
+    const result = await DB.query(queryText, [user.name, user.color, user.email, user.password]);
+    return result.rows[0];
+}
+
+export { getAll, getById, getByEmail, createUser };
