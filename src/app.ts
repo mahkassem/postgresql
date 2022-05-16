@@ -15,12 +15,13 @@ app.use(
     cors(),
     helmet(),
     json(),
-    morgan("dev"));
+    morgan("dev")
+);
 
 /**
  * ? Routes
  */
-app.use(routes);
+app.use("/api", routes);
 
 /**
  * ? Listen on port
@@ -28,3 +29,5 @@ app.use(routes);
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+export default app;

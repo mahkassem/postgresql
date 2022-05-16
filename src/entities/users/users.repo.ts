@@ -25,4 +25,10 @@ const createUser = async (user: User): Promise<User> => {
     return result.rows[0];
 }
 
-export { getAll, getById, getByEmail, createUser };
+const deleteUser = async (id: number): Promise<boolean> => {
+    const queryText = `DELETE FROM users WHERE id = $1`;
+    const result = await DB.query(queryText, [id]);
+    return result.rowCount > 0;
+};
+
+export { getAll, getById, getByEmail, createUser, deleteUser };

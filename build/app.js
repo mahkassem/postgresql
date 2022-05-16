@@ -27,20 +27,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
+const routes_1 = __importDefault(require("./routes"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+const config_1 = __importDefault(require("./config"));
 const app = (0, express_1.default)();
-const port = process.env.PORT || 3000;
+const port = config_1.default.app.port;
 /**
  * ? Middlewares
  */
 app.use((0, cors_1.default)(), (0, helmet_1.default)(), (0, express_1.json)(), (0, morgan_1.default)("dev"));
+/**
+ * ? Routes
+ */
+app.use("/api", routes_1.default);
 /**
  * ? Listen on port
  */
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+exports.default = app;

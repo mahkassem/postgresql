@@ -10,7 +10,7 @@
         "build": "npx tsc",
         "db:up": "npx db-migrate up",
         "db:down": "npx db-migrate reset",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "set ENV=test&& npx db-migrate --env test up&& jasmine &&npx db-migrate --env test reset"
     },
     "author": "",
     "license": "ISC",
@@ -22,6 +22,7 @@
         "@types/jsonwebtoken": "^8.5.8",
         "@types/morgan": "^1.9.3",
         "@types/pg": "^8.6.5",
+        "@types/supertest": "^2.0.12",
         "jasmine": "^4.1.0",
         "nodemon": "^2.0.15",
         "ts-node": "^10.7.0",
@@ -35,8 +36,10 @@
         "dotenv": "^16.0.0",
         "express": "^4.18.0",
         "helmet": "^5.0.2",
+        "jasmine-spec-reporter": "^7.0.0",
         "jsonwebtoken": "^8.5.1",
         "morgan": "^1.10.0",
-        "pg": "^8.7.3"
+        "pg": "^8.7.3",
+        "supertest": "^6.2.3"
     }
 }
