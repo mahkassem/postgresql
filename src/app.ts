@@ -1,21 +1,32 @@
-import express, { Application, json } from "express";
+import express, { Application, json, urlencoded } from "express";
 import routes from "./routes";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import config from "./config";
+import fileUpload from "express-fileupload";
 
 const app: Application = express();
 const port = config.app.port;
+
+/**
+ * ? Fileupload
+ */
+app.use(fileUpload({
+    createParentPath: true,
+    limits: { fileSize: 50 * 1024 * 1024 }, // 50MB,
+    debug: true
+}))
 
 /**
  * ? Middlewares
  */
 app.use(
     cors(),
-    helmet(),
     json(),
-    morgan("dev")
+    urlencoded({ extended: true }),
+    morgan("dev"),
+    helmet()
 );
 
 /**
